@@ -1,0 +1,119 @@
+{% extends 'components/layout.html' %}
+
+{% block header %}
+<h1 style="color:rgb(113, 133, 168);text-align:center; background-color: rgb(15, 33, 48); margin-bottom: 0px;">CHARACTERS</h1>
+{% endblock header %}
+
+{% block content %}
+
+<img id = "character-main-image" src="static/images/halo_img6.jpg" class="rounded mx-auto d-block">
+<div>
+    <h1 id = "char-description">Characters</h1>
+</div>
+<p style="color:rgb(236, 239, 245);text-align:center;">{{ characters }}</p>
+<div class="card-deck">
+    <div class="card">
+      <img class="card-img-top" src="static/images/grunt.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Grunt</h5>
+        <p class="card-text">Species: Unggoy<br>
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-black-50">Covenant</small>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="static/images/mc.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Master Chief John:117</h5>
+        <p class="card-text">Species: SPARTAN</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-black-50">UNSC</small>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="static/images/gravemind.webp" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Gravemind</h5>
+        <p class="card-text">Species: Flood</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-black-50">Flood</small>
+      </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="static/images/arbiter.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Arbiter</h5>
+          <p class="card-text">Species: Sangheili</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-black-50">Covenant</small>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="static/images/cortana.jfif" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Cortana</h5>
+          <p class="card-text">Species: Artificial Intelligence</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-black-50">UNSC</small>
+        </div>
+      </div>
+  </div>
+  <div class="card-deck">
+    <div class="card">
+      <img class="card-img-top" src="static/images/regret.jfif" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Prophet of Regret</h5>
+        <p class="card-text">Species: San'Shyuum</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-black-50">Covenant</small>
+      </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="static/images/Johnson.webp" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Avery Johnson</h5>
+          <p class="card-text">Species: Human</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-black-50">UNSC</small>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="static/images/heretic.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Sesa 'Refumee</h5>
+          <p class="card-text">Species: Sangheili</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-black-50">Covenant</small>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="static/images/keyes.jfif" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Miranda Keyes</h5>
+          <p class="card-text">Species: Human</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-black-50">UNSC</small>
+        </div>
+      </div>
+      <div class="card">
+        <img class="card-img-top" src="static/images/guilty.jfif" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">343 Guilty Spark</h5>
+          <p class="card-text">Species: Forerunner Ancilla</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-black-50">Forerunners</small>
+        </div>
+      </div>
+</div>
+{% endblock content%}

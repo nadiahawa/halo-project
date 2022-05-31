@@ -1,0 +1,27 @@
+{% extends 'components/layout.html' %}
+
+
+
+{% block content %}
+<img id = "about-main-image" src="static/images/halo_img3.jpg" class="rounded mx-auto d-block">
+<h2 id = "about-description">{{about}}</h2>
+<div>
+    <p id = "about-story">{{ story }}</p>
+</div>
+<div class="container">
+    <div class="center">The game begins on High Charity, the mobile capital city of the Covenant.<br>
+        The former Supreme Commander of the Fleet of Particular Justice, Commander Thel 'Vadamee, is being <br>
+        tried before the High Council for his failure to protect Halo. Despite his insistence that the Flood <br>
+        hampered his abilities, the Hierarchs who lead the council, the High Prophets of Truth, Mercy, and Regret, <br>
+        deem him guilty of failing to protect the Sacred Ring. 'Vadamee is then stripped of his rank and branded with <br>
+        the Mark of Shame by Tartarus, the Chieftain of the Jiralhanae.<br><br>
+    
+    </div>
+  </div>
+{% endblock content%}
+
+
+
+{% block header %}
+<h1 style="color:rgb(113, 133, 168);text-align:center; background-color: rgb(15, 33, 48); margin-bottom: 0px;">ABOUT</h1>
+{% endblock header %}
