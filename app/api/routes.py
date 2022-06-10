@@ -4,6 +4,8 @@ from app.api.services import token_required
 api = Blueprint('api', __name__, url_prefix='/api')
 from app.models import Character,db, User
 from .services import token_required
+# import stripe
+# import os
 
 
 
@@ -66,3 +68,6 @@ def removeCharacter(id):
     db.session.delete(character)
     db.session.commit()
     return jsonify({'Removed character': character.to_dict()}), 200
+
+
+# stripe.api_key = os.environ.get('STRIPE_SECRET')
