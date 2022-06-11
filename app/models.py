@@ -23,6 +23,7 @@ class Character(db.Model):
     affiliation = db.Column(db.String(100), default=None)
     image = db.Column(db.String(255), default=None)
     creator = db.Column(db.String(255), db.ForeignKey('user.id'))
+    price = db.Column(db.Float(50), nullable = False)
 
     def __init__(self, dict):
         self.id = str(uuid4())
@@ -31,6 +32,7 @@ class Character(db.Model):
         self.affiliation = dict.get('affiliation')
         self.image = dict.get('image')
         self.creator = dict.get('creator')
+        self.price = dict.get('price')
         
 
     def to_dict(self):
@@ -40,7 +42,8 @@ class Character(db.Model):
             'species' : self.species,
             'affiliation' : self.affiliation,
             'image' : self.image,
-            'creator': self.creator
+            'creator': self.creator,
+            'price': self.price
         }
 
     def from_dict(self, dict):
