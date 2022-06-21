@@ -16,7 +16,7 @@ def load_user(userid):
     return User.query.get(userid)
 
 
-class Character(db.Model):
+class Weapons(db.Model):
     id = db.Column(db.String(40), primary_key=True)
     name = db.Column(db.String(100), nullable = False)
     species = db.Column(db.String(100), nullable = False)
@@ -107,16 +107,16 @@ class Cart(db.Model):
         
 
 class Cartitems(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     item = db.Column(db.String(255))
     cart = db.Column(db.Integer, db.ForeignKey('cart.id'))
     item_type = db.Column(db.String(255))
 
     def __init__(self, dict):
-        self.id = str(uuid4())
         self.item = dict.get('item')
         self.cart = dict.get('cart')
         self.item_type = dict.get('item_type')
+        
         
 
     def to_dict(self):

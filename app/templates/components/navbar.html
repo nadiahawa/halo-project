@@ -13,15 +13,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('about') }}">About</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('characters') }}">Characters</a>
-            </li>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Shop
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{ url_for('weapons') }}">Weapons</a>
                 <a class="dropdown-item" href="{{ url_for('vehicles') }}">Vehicles</a>
                 <a class="dropdown-item" href="{{ url_for('specialitems') }}">Special Items</a>
               </div>

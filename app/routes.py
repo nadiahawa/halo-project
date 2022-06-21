@@ -22,13 +22,13 @@ def about():
     print(about)
     return render_template('about.html', about=about, story=story)
 
-@app.route('/characters', methods=['GET'])
+@app.route('/weapons', methods=['GET'])
 @cross_origin()
 @login_required
-def characters():
-    characters = 'we r going ot havr to oull from the db for this one'
-    print(characters)
-    return render_template('characters.html', characters=characters)
+def weapons():
+    weapons = 'Pulling from database...'
+    print(weapons)
+    return render_template('weapons.html', weapons=weapons)
 
 
 @app.route('/blog/<string:username>', methods =['GET'])
@@ -40,12 +40,6 @@ def userProfile(username):
         p.timestamp = str(p.timestamp)[:-7]
     return render_template('profile.html', user=user, posts=posts)
 
-@app.route('/weapons')
-@cross_origin()
-def weapons():
-    weapons = 'The weapons so far...'
-    print(weapons)
-    return render_template('weapons.html', weapons=weapons)
 
 @app.route('/vehicles')
 @cross_origin()

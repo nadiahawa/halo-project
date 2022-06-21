@@ -1,9 +1,11 @@
 import json
+from re import X
 from tabnanny import check
 from flask import Blueprint, jsonify, request
+from pkg_resources import iter_entry_points
 from app.api.services import token_required
 api = Blueprint('api', __name__, url_prefix='/api')
-from app.models import Cartitems, Character,db, User, Cart, Special, Vehicles
+from app.models import Cartitems, Weapons,db, User, Cart, Special, Vehicles
 from .services import token_required
 from flask_cors import CORS, cross_origin
 from werkzeug.security import check_password_hash
@@ -15,20 +17,20 @@ from werkzeug.security import check_password_hash
 @api.route('/test', methods=['GET'])
 @cross_origin()
 def test():
-    x = Character.query.all()
+    x = Weapons.query.all()
     return jsonify('testing'), 200
 
 
 
 
-@api.route('/characters', methods=['GET'])
-def getCharacters():
-    characters = Character.query.all()
-    for c in characters:
-        if User.id == Character.creator:
-            print(characters)
-    characters = {c.id:c.to_dict() for c in characters}
-    response = jsonify(characters)
+@api.route('/weapons', methods=['GET'])
+def getWeapons():
+    weapons = Weapons.query.all()
+    for c in weapons:
+        if User.id == Weapons.creator:
+            print(weapons)
+    weapons = {c.id:c.to_dict() for c in weapons}
+    response = jsonify(weapons)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response, 200
     #this is to help with CORS 
@@ -45,7 +47,6 @@ def getCart():
     # response = jsonify(get_cart)
     response = {}
     print(id)
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response, 200
 
 @api.route('/cart/items', methods=['GET'])
@@ -59,7 +60,7 @@ def getCartItems():
         item_type = i.item_type
         whole_cart.append(i.to_dict())
         if item_type == 'Weapon':
-            weapon = Character.query.filter_by(name=i.item).first()
+            weapon = Weapons.query.filter_by(name=i.item).first()
             total_cost += weapon.price
         if item_type == 'Special':
             special = Special.query.filter_by(name=i.item).first()
@@ -73,6 +74,7 @@ def getCartItems():
     whole_cart.append(total_cost_dict)
     response = jsonify(whole_cart)
     # print(id)
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response, 200
     # given cart id-done
     # query cart-items table where cart=id
@@ -92,14 +94,14 @@ def getCartItems():
 #     db.session.commit()
 
 
-@api.route('/characters/<string:name>', methods=['GET'])
+@api.route('/weapons/<string:name>', methods=['GET'])
 @cross_origin()
-def getCharactersName(name):
+def getWeaponsName(name):
     print(name)
-    character = Character.query.filter_by(name=name).first()
-    if character:
-        return jsonify(character.to_dict()), 200
-    return jsonify({'error': f'no such character with the name {name}'})
+    weapons = Weapons.query.filter_by(name=name).first()
+    if weapons:
+        return jsonify(weapons.to_dict()), 200
+    return jsonify({'error': f'no such weapons with the name {name}'})
 
 
 
@@ -118,25 +120,25 @@ def getCharactersName(name):
 
 @api.route('/update/<string:id>', methods =['POST'])
 @cross_origin()
-def updateCharacter(id):
+def updateWeapons(id):
     try:
         newvals = request.get_json()
-        character = Character.query.get(id)
-        character.from_dict(newvals)
+        weapons = Weapons.query.get(id)
+        weapons.from_dict(newvals)
         db.session.commit()
-        return jsonify({'Updated character': character.to_dict()}), 200
+        return jsonify({'Updated weapons': weapons.to_dict()}), 200
     except:
-        return jsonify({'Request failed': 'Invalid request or character ID does not exist.'}), 400
+        return jsonify({'Request failed': 'Invalid request or weapons ID does not exist.'}), 400
 
 @api.route('/delete/<string:id>', methods=['DELETE'])
 @cross_origin()
-def removeCharacter(id):
-    character = Character.query.get(id)
-    if not character:
-        return jsonify({'Remove failed': f'No character with ID {id} in the database.'}), 404
-    db.session.delete(character)
+def removeWeapons(id):
+    weapons = Weapons.query.get(id)
+    if not weapons:
+        return jsonify({'Remove failed': f'No weapons with ID {id} in the database.'}), 404
+    db.session.delete(weapons)
     db.session.commit()
-    return jsonify({'Removed character': character.to_dict()}), 200
+    return jsonify({'Removed weapons': weapons.to_dict()}), 200
 
 
 @api.route('/signin', methods=['GET', 'POST'])
@@ -156,3 +158,78 @@ def getUser():
 
 
 # stripe.api_key = os.environ.get('STRIPE_SECRET')
+
+
+@api.route('/vehicles', methods=['GET'])
+def getVehicles():
+    vehicles = Vehicles.query.all()
+    for c in vehicles:
+        if User.id == Weapons.creator:
+            print(vehicles)
+    vehicles = {c.id:c.to_dict() for c in vehicles}
+    response = jsonify(vehicles)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
+
+@api.route('/special', methods=['GET'])
+def getSpecial():
+    special = Special.query.all()
+    for c in special:
+        if User.id == Weapons.creator:
+            print(special)
+    special = {c.id:c.to_dict() for c in special}
+    response = jsonify(special)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
+
+
+@api.route('/additem', methods=['POST'])
+@cross_origin
+def addItem():
+    # cart = User.query.all(carts)
+    json_req = request.get_json()
+    type_add = json_req['item_type']
+    cart_add = json_req['cart']
+    item_add = json_req['item']
+    cart_dict = {}
+    # for variable in [type_add, cart_add, item_add]:
+    cart_dict['item_type'] = type_add
+    cart_dict['cart'] = cart_add
+    cart_dict['item'] = item_add
+    print(cart_dict)
+    me = Cartitems(cart_dict)
+    print(me.cart)
+    db.session.add(me)
+    db.session.commit()
+    response = []
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response, 200
+    #USING THE ID OF THE ITEM THAT HAS THE ONCLIKC WE WANT TO TAKE THE ID ATTACHED TO THAT 
+    #ITEM AND APPEND IT TO OUR CARTITEMS DEPENDING ON THE USERS ID AS WELL
+    # json_req = request.get_json()
+    # check_user = User.query.filter_by(username=json_req['username']).first()
+    # cart = User.query.get('carts')
+    # print(cart)
+    # print(check_user)
+    # itemtoadd = Cart.query.filter_by(cart=id)
+    # item_type = it
+    # if it == 
+    # db.session.add()
+    # db.session.commit()
+    response = ''
+    return response, 200
+
+
+
+# @api.route('/create', methods=['POST'])
+# @cross_origin()
+# def createCart():
+#     newdict=request.get_json()
+#     # print(newdict)
+#     c = Cart(newdict)
+#     # print(c)
+#     db.session.add(c)
+#     db.session.commit()
+#     # print({'created': c.to_dict})
+#     # print(type(c))
+#     return str(200)

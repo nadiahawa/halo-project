@@ -1,7 +1,7 @@
 from flask import request
 
-def getallcharacters():
-    halo_api = request.get('http://127.0.0.1:5000/api/characters')
+def getallweapons():
+    halo_api = request.get('http://127.0.0.1:5000/api/weapons')
     if halo_api.status_code == 200:
         halo_data = halo_api.json()
     else:
