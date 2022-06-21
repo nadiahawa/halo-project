@@ -9,6 +9,7 @@ from .api.routes import api
 app = Flask(__name__)
 
 app.config.from_object(Config)
+app.config['CORS_HEADERS']='Content-Type'
 
 app.register_blueprint(auth)
 app.register_blueprint(api)

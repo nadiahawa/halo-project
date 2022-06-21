@@ -5,6 +5,7 @@
 <div class="text-center">
     <img class = "rounded-pill d-block" src="/static/images/login_img.webp" width="900" height="400" >
 </div>
+<div class ="mainregisterpage">
 <form class="p-3" method="POST">
     {{ form.hidden_tag() }}
     <div class="form-group">
@@ -45,4 +46,5 @@
     </div>
     {{ form.submit(class='btn btn-block btn-outline-primary') }}
 </form>
+</div>
 {% endblock content %}

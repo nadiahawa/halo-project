@@ -1,0 +1,33 @@
+{% extends 'components/layout.html' %}
+
+
+
+{% block content %}
+<img id = "weapons-main-image" src="static/images/halo_img4.jpg" class="rounded mx-auto d-block">
+<h2 id = "weapons-description">{{weapons}}</h2>
+
+<div class="container">
+    <div class="row g-2">
+      <div class="col-6">
+        <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+      <div class="col-6">
+        <div class="p-3 border bg-light">Custom column padding</div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+{% endblock content%}
+
+
+
+{% block header %}
+<h1 style="color:rgb(113, 133, 168);text-align:center; background-color: rgb(15, 33, 48); margin-bottom: 0px;">WEAPONS</h1>
+{% endblock header %}
