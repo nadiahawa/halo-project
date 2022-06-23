@@ -69,12 +69,13 @@ def getCartItems():
             vehicle = Vehicles.query.filter_by(name=i.item).first()
             total_cost += vehicle.price
     print(whole_cart)
+    # db.session.add()
+    # db.session.commit()
     total_cost_dict = {}
     total_cost_dict['total_cost'] = total_cost
     whole_cart.append(total_cost_dict)
     response = jsonify(whole_cart)
     # print(id)
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response, 200
     # given cart id-done
     # query cart-items table where cart=id
@@ -183,9 +184,10 @@ def getSpecial():
     return response, 200
 
 
-@api.route('/additem', methods=['POST'])
-@cross_origin
+@api.route('/additem', methods=['GET', 'POST'])
+@cross_origin()
 def addItem():
+    print('testing')
     # cart = User.query.all(carts)
     json_req = request.get_json()
     type_add = json_req['item_type']
@@ -198,7 +200,7 @@ def addItem():
     cart_dict['item'] = item_add
     print(cart_dict)
     me = Cartitems(cart_dict)
-    print(me.cart)
+    print(me)
     db.session.add(me)
     db.session.commit()
     response = []

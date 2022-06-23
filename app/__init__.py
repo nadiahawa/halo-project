@@ -4,7 +4,7 @@ from .auth.routes import auth
 from .models import db, login
 from flask_migrate import Migrate
 from .api.routes import api
-
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -24,5 +24,5 @@ login.login_message = 'Please log in to see this page.'
 login.login_message_category = 'danger'
 
 
-
+# CORS(app, origins='*')
 from . import routes
